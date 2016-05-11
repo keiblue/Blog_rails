@@ -1,0 +1,28 @@
+  <h1><%= @article.title %></h1>
+  <div class="field">
+    <%= image_tag @article.cover.url()%>
+  </div>
+  <p>
+    <%= @article.body %>
+  </p>
+  <%unless @article.user.nil?%>
+  <p>
+    Escrito por <%= @article.user.email%>
+  </p>
+  <%end%>
+  <p>
+    Visitas <%= @article.visits_count%>
+  </p>
+  <div class="field">
+    <h3>Comentarios</h3> <%= render "comments/form"%>
+    <ul id="comments-box">
+    <% @article.comments.each do |comm|%>
+    <li>
+      <%= comm.body  %> - <%= comm.user.email %>
+    </li>
+    <%end%>
+  </ul>
+  </div>
+  <div>
+    <%= link_to "Editar", edit_article_path(@article) %>
+</div>
